@@ -1,0 +1,93 @@
+{
+  "name": "react-platter",
+  "version": "1.0.0",
+  "description": "A react starter kit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bnr dev",
+    "build": "bnr build",
+    "precommit": "yarn run lint",
+    "lint": "lint-staged '**/*.js' --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn run lint:fix",
+      "git add"
+    ]
+  },
+  "betterScripts": {
+    "dev": {
+      "command": "webpack-dev-server --hot --mode development",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "build": {
+      "command": "webpack --mode production",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  },
+  "keywords": [
+    "react",
+    "starter",
+    "kit"
+  ],
+  "author": "Aatif Bandet",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "app-root-dir": "^1.0.2",
+    "emotion": "^10.0.27",
+    "history": "^4.10.1",
+    "hoist-non-react-statics": "^3.3.2",
+    "invariant": "^2.2.4",
+    "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet-async": "^1.0.6",
+    "react-loadable": "^5.5.0",
+    "react-redux": "^7.2.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-router-redux": "^4.0.8",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "assets-webpack-plugin": "^3.9.12",
+    "autoprefixer": "^9.8.0",
+    "babel-loader": "^8.1.0",
+    "better-npm-run": "^0.1.1",
+    "copy-webpack-plugin": "^6.0.1",
+    "css-loader": "^3.5.3",
+    "eslint": "^7.1.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "file-loader": "^6.0.0",
+    "fs-extra": "^9.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.6",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^2.0.5",
+    "react-hot-loader": "^4.12.21",
+    "style-loader": "^1.2.1",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
