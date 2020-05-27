@@ -1,7 +1,11 @@
-# react-redux-boilerplate
+# Set up react app with built in redux-saga
 
-# yarn 
-# yarn dev
+Quick Overview
+` cd react-redux-boilerplate
+  yarn
+  yarn dev`
+
+Then open http://localhost:8080/ to see your app.
 
 
 Packages
