@@ -3,7 +3,7 @@
 
 // import App from "./App";
 
-var a = 1;
+var a = 2;
 import React from 'react';
 import { render, hydrate } from 'react-dom';
 import Loadable from 'react-loadable';
