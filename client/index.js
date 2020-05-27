@@ -1,0 +1,29 @@
+// import React from "react";
+// import ReactDOM from "react-dom";
+
+// import App from "./App";
+
+
+// ReactDOM.render(<App />, document.querySelector("#root"));
+
+import React from 'react';
+import { render, hydrate } from 'react-dom';
+import Loadable from 'react-loadable';
+import { createBrowserHistory } from 'history';
+ 
+ 
+import App from './App';
+
+const history = createBrowserHistory();
+ 
+Loadable.preloadReady().then(() => {
+   const container = document.getElementById('root');
+   const bootstrap = render;
+   const props = {
+     history,
+   };
+
+  bootstrap(<App {...props} />, container);
+});
+
+
