@@ -10,11 +10,7 @@ const Login = (props) => {
   useInjectReducer({ key: 'loginReducer', reducer: loginReducer });
   useInjectSaga({ key: 'loginSaga', saga: loginSaga });
 
-  return (
-    <div>
-      <LoginForm {...props} />
-    </div>
-  );
+  return <LoginForm {...props} />;
 };
 
 function mapStateToProps(props) {
