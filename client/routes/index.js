@@ -1,7 +1,6 @@
 import React from 'react';
 import { shape } from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
-
 import Loader from '@components/Loader';
 import Loadable from 'react-loadable';
 import Layout from '@components/Layout';

@@ -119,7 +119,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      template: `${__dirname }/client/index.html`,
+      template: `${__dirname}/client/index.html`,
       filename: 'index.html',
       inject: 'body',
       chunksSortMode: 'none',
