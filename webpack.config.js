@@ -67,6 +67,18 @@ module.exports = {
               plugins: ['@babel/plugin-proposal-class-properties'],
             },
           ],
+          plugins: [
+            [
+              'emotion',
+              {
+                // sourceMap is on by default but source maps are dead code eliminated in production
+                // "sourceMap": ifDev,
+                autoLabel: !!ifDev,
+                // "labelFormat": "[local]",
+                // "cssPropOptimization": true
+              },
+            ],
+          ],
         },
       },
       {
@@ -78,7 +90,10 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[name]__[local]___[hash:base64:5]',
+                // dynamic names to class
+                localIdentName: !ifDev
+                  ? '[name]__[local]___[hash:base64:5]'
+                  : false,
               },
               sourceMap: true,
             },

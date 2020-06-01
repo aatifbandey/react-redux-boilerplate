@@ -12,6 +12,9 @@ module.exports = {
     'template-curly-spacing': ['off'],
     'react/forbid-prop-types': 'off',
     'react/static-property-placement': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'array-callback-return': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
     'max-len': ['error', { code: 150 }],
   },
   env: {
