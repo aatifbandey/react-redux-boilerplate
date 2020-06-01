@@ -27,14 +27,22 @@ const routeNotFounde = Loadable({
   delay: 200, // delay in milliseconds, useful for suspense
 });
 
+const routeDesigner = Loadable({
+  loader: () => import(/* webpackChunkName: "designer" */ '@routes/Designer').catch(
+    errorLoading,
+  ),
+  loading: () => <Loader />, // full page loader here
+  delay: 200, // delay in milliseconds, useful for suspense
+});
+
 const Routes = (props) => {
   const { history, location, match } = props;
-
   return (
     <Layout history={history} location={location} match={match}>
       <Switch>
         <Route key="login" exact path="/" component={routeLogin} />
         <Route key="home" exact path="/home" component={routeHome} />
+        <Route key="designer" path="/designer" component={routeDesigner} />
         <Route key="notfound" path="*" component={routeNotFounde} />
       </Switch>
     </Layout>
