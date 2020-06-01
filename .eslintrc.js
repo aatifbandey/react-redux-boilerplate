@@ -15,7 +15,7 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 'off',
     'array-callback-return': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
-    'max-len': ['error', { code: 150 }],
+    'max-len': ['error', { code: 250 }],
   },
   env: {
     browser: true,

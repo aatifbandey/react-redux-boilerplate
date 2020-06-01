@@ -1,11 +1,10 @@
 import React from 'react';
 import { number } from 'prop-types';
-
 import { ratingContainer, ratingNumbers } from './styles';
 
 const RatingQuestion = (props) => {
   const { maxValue, minValue } = props;
-
+  console.log('RatingQuestion');
   const buildQuestion = () => {
     const ratingHtml = [];
     for (let k = minValue; k <= maxValue; k += 1) {
