@@ -34,3 +34,18 @@ export const ratingNumbers = css`
   align-items: center;
   margin: 0 4px 0 4px;
 `;
+
+export const selectionNumbers = css`
+  background: #ccc;
+  width: 30%;
+  height: 34px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 4px 0 4px;
+`;
+
+export const selectionContainer = css`
+  display: flex;
+`;

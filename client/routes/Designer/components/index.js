@@ -13,7 +13,6 @@ import {
 import QuestionContainer from './questions';
 
 const SurveyDesigner = (props) => {
-  console.log(props);
   const { /* dispatch, */ reducerData } = props;
   const { survey } = reducerData;
 
@@ -28,12 +27,19 @@ const SurveyDesigner = (props) => {
   const showHideQuestionList = () => {
     updateQuestionListFlag(true);
   };
+
+  const addChoice = (index) => {
+    const defaultChoice = 'Choice';
+    const cloneSurvey = cloneDeep(surveyData);
+    cloneSurvey.groups[activeGroup].questions[index].choices.push({
+      title: defaultChoice,
+    });
+    updateSurveyData(cloneSurvey);
+  };
+
   const addQuestion = ({ type }) => {
-    console.log(questionMock[type]);
-    console.log(surveyData);
     const cloneSurvey = cloneDeep(surveyData);
     const questData = questionMock[type];
-
     cloneSurvey.groups[activeGroup].questions.push(questData);
     updateSurveyData(cloneSurvey);
     updateQuestionListFlag(false);
@@ -58,7 +64,9 @@ const SurveyDesigner = (props) => {
       </div>
     );
   };
-  const renderQuestions = () => surveyData.groups[activeGroup].questions.map((data) => <QuestionContainer {...data} />);
+  const renderQuestions = () => surveyData.groups[activeGroup].questions.map((data, index) => (
+    <QuestionContainer {...data} index={index} addChoice={addChoice} />
+  ));
   console.log(surveyData);
   return (
     <div className={container}>
