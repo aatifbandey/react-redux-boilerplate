@@ -1,5 +1,5 @@
-import React from 'react';
-import { string } from 'prop-types';
+import React, { useState } from 'react';
+import { string, number, func } from 'prop-types';
 import Loadable from 'react-loadable';
 import { questionWrapper } from './styles';
 
@@ -20,18 +20,41 @@ const SelectionQuestion = Loadable({
 });
 
 const QuestionContainer = (props) => {
-  const { title, type } = props;
+  const {
+    title, type, index, editTitle,
+  } = props;
+  const [showInputTitle, setInputTitle] = useState(false);
   const renderTypeOfQuestion = () => {
     if (type === 'rating') {
       return <RatingQuestion {...props} />;
-    } if (type === 'selection') {
+    }
+    if (type === 'selection') {
       return <SelectionQuestion {...props} />;
     }
     return <div> Question </div>;
   };
+  const changeTitle = (e) => {
+    if (e.key === 'Enter') {
+      if (e.target.value.length !== 0) {
+        editTitle({ titleText: e.target.value, index });
+      }
+      setInputTitle(false);
+    }
+  };
+
   return (
     <div className={questionWrapper}>
-      <div>{title}</div>
+      <div onClick={() => setInputTitle(true)}>
+        {!showInputTitle ? (
+          `${title}`
+        ) : (
+          <input
+            type="text"
+            defaultValue={title}
+            onKeyPress={(e) => changeTitle(e)}
+          />
+        )}
+      </div>
       {renderTypeOfQuestion()}
     </div>
   );
@@ -40,5 +63,7 @@ const QuestionContainer = (props) => {
 QuestionContainer.propTypes = {
   title: string.isRequired,
   type: string.isRequired,
+  index: number.isRequired,
+  editTitle: func.isRequired,
 };
 export default QuestionContainer;

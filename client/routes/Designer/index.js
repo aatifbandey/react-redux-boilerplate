@@ -12,7 +12,7 @@ const SurveyContainer = (props) => {
   useInjectReducer({ key: 'designerReducer', reducer: designerReducer });
   useInjectSaga({ key: 'designerSaga', saga: designerSaga });
   const { reducerData } = props;
-  console.log(props);
+
   return (
     <>{reducerData ? <SurveyDesigner {...props} /> : <div> Loading </div>}</>
   );

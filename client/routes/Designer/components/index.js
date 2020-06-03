@@ -28,7 +28,7 @@ const SurveyDesigner = (props) => {
     updateQuestionListFlag(true);
   };
 
-  const addChoice = (index) => {
+  const addChoice = ({ index }) => {
     const defaultChoice = 'Choice';
     const cloneSurvey = cloneDeep(surveyData);
     cloneSurvey.groups[activeGroup].questions[index].choices.push({
@@ -64,10 +64,32 @@ const SurveyDesigner = (props) => {
       </div>
     );
   };
+
+  const editTitle = ({ titleText, index }) => {
+    const newSurveyData = cloneDeep(surveyData);
+    console.log('props', titleText);
+    newSurveyData.groups[activeGroup].questions[index].title = titleText;
+    updateSurveyData(newSurveyData);
+  };
+
+  const editChoice = ({ choiceText, index, secondIndex }) => {
+    const newSurveyData = cloneDeep(surveyData);
+    newSurveyData.groups[activeGroup].questions[index].choices[
+      secondIndex
+    ].title = choiceText;
+    updateSurveyData(newSurveyData);
+  };
+
   const renderQuestions = () => surveyData.groups[activeGroup].questions.map((data, index) => (
-    <QuestionContainer {...data} index={index} addChoice={addChoice} />
+    <QuestionContainer
+      {...data}
+      index={index}
+      addChoice={addChoice}
+      editTitle={editTitle}
+      editChoice={editChoice}
+    />
   ));
-  console.log(surveyData);
+
   return (
     <div className={container}>
       <div>
