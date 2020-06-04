@@ -9,6 +9,9 @@ import {
   addQuestionButton,
   questionListContainer,
   wrapperForQuestionList,
+  UnactiveGroup,
+  header,
+  close,
 } from './styles';
 import QuestionContainer from './questions';
 
@@ -19,7 +22,7 @@ const SurveyDesigner = (props) => {
   const questionMock = questionList();
 
   const [surveyData, updateSurveyData] = useState(survey);
-
+  const newGroup = cloneDeep(survey.groups[0]);
   const [activeGroup, updateActiveGroup] = useState(0);
 
   const [questionListFlag, updateQuestionListFlag] = useState(false);
@@ -47,12 +50,39 @@ const SurveyDesigner = (props) => {
   const changeActiveGroup = (grpIndex) => {
     updateActiveGroup(grpIndex);
   };
+  const addGroup = () => {
+    const newSurveyData = cloneDeep(surveyData);
+    newSurveyData.groups.push(newGroup);
+    updateSurveyData(newSurveyData);
+  };
+  const removeGroup = (e, index) => {
+    if (index === surveyData.groups.length - 1) {
+      e.stopPropagation();
+    }
+    const newSurveyData = cloneDeep(surveyData);
+    updateActiveGroup(index - 1);
+    newSurveyData.groups.splice(index, 1);
+    updateSurveyData(newSurveyData);
+  };
+
+  const removeQuestion = (index) => {
+    const newSurveyData = cloneDeep(surveyData);
+    newSurveyData.groups[activeGroup].questions.splice(index, 1);
+    updateSurveyData(newSurveyData);
+  };
+
   const renderGroups = () => {
     const groupsHtml = [];
     surveyData.groups.map((d, i) => {
       groupsHtml.push(
-        <div className={individualGroup} onClick={() => changeActiveGroup(i)}>
+        <div
+          className={activeGroup === i ? individualGroup : UnactiveGroup}
+          onClick={() => changeActiveGroup(i)}
+        >
           {d.name}
+          <div className={close} onClick={(e) => removeGroup(e, i)}>
+            x
+          </div>
         </div>,
       );
     });
@@ -60,14 +90,13 @@ const SurveyDesigner = (props) => {
     return (
       <div className={groupsContainer}>
         {groupsHtml}
-        <div> +Add Group </div>
+        <div onClick={() => addGroup()}> +Add Group </div>
       </div>
     );
   };
 
   const editTitle = ({ titleText, index }) => {
     const newSurveyData = cloneDeep(surveyData);
-    console.log('props', titleText);
     newSurveyData.groups[activeGroup].questions[index].title = titleText;
     updateSurveyData(newSurveyData);
   };
@@ -87,11 +116,13 @@ const SurveyDesigner = (props) => {
       addChoice={addChoice}
       editTitle={editTitle}
       editChoice={editChoice}
+      removeQuestion={removeQuestion}
     />
   ));
 
   return (
     <div className={container}>
+      <h2 className={header}>SURVEY</h2>
       <div>
         {renderGroups()}
         {renderQuestions()}

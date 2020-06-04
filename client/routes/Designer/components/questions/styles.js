@@ -49,3 +49,12 @@ export const selectionNumbers = css`
 export const selectionContainer = css`
   display: flex;
 `;
+
+export const titleQuestion = css`
+  display: flex;
+`;
+
+export const closeQuestion = css`
+  position: relative;
+  left: 55%;
+`;
