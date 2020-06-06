@@ -22,7 +22,11 @@ const SurveyDesigner = (props) => {
   const questionMock = questionList();
 
   const [surveyData, updateSurveyData] = useState(survey);
-  const newGroup = cloneDeep(survey.groups[0]);
+  const newGroup = {
+    questions: [],
+    name: 'Group',
+  };
+
   const [activeGroup, updateActiveGroup] = useState(0);
 
   const [questionListFlag, updateQuestionListFlag] = useState(false);
@@ -56,15 +60,12 @@ const SurveyDesigner = (props) => {
     updateSurveyData(newSurveyData);
   };
   const removeGroup = (e, index) => {
-    if (index === surveyData.groups.length - 1) {
-      e.stopPropagation();
-    }
+    e.stopPropagation();
     const newSurveyData = cloneDeep(surveyData);
-    updateActiveGroup(index - 1);
+    updateActiveGroup(0);
     newSurveyData.groups.splice(index, 1);
     updateSurveyData(newSurveyData);
   };
-
   const removeQuestion = (index) => {
     const newSurveyData = cloneDeep(surveyData);
     newSurveyData.groups[activeGroup].questions.splice(index, 1);
@@ -80,9 +81,13 @@ const SurveyDesigner = (props) => {
           onClick={() => changeActiveGroup(i)}
         >
           {d.name}
-          <div className={close} onClick={(e) => removeGroup(e, i)}>
-            x
-          </div>
+          {surveyData.groups.length > 1 ? (
+            <div className={close} onClick={(e) => removeGroup(e, i)}>
+              x
+            </div>
+          ) : (
+            ''
+          )}
         </div>,
       );
     });
