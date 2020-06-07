@@ -28,7 +28,6 @@ const SurveyDesigner = (props) => {
   };
 
   const [activeGroup, updateActiveGroup] = useState(0);
-
   const [questionListFlag, updateQuestionListFlag] = useState(false);
 
   const showHideQuestionList = () => {
