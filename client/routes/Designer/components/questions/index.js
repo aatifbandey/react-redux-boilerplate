@@ -57,7 +57,7 @@ const QuestionContainer = (props) => {
           )}
         </div>
         <div className={closeQuestion} onClick={() => removeQuestion(index)}>
-          x
+          X
         </div>
       </div>
       {renderTypeOfQuestion()}
