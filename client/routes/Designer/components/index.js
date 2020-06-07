@@ -9,7 +9,7 @@ import {
   addQuestionButton,
   questionListContainer,
   wrapperForQuestionList,
-  UnactiveGroup,
+  unactiveGroup,
   header,
   close,
 } from './styles';
@@ -77,7 +77,7 @@ const SurveyDesigner = (props) => {
     surveyData.groups.map((d, i) => {
       groupsHtml.push(
         <div
-          className={activeGroup === i ? individualGroup : UnactiveGroup}
+          className={activeGroup === i ? individualGroup : unactiveGroup}
           onClick={() => changeActiveGroup(i)}
         >
           {d.name}

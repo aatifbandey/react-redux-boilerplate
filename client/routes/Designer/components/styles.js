@@ -20,7 +20,7 @@ export const individualGroup = css`
   border-radius: 8px;
 `;
 
-export const UnactiveGroup = css`
+export const unactiveGroup = css`
   background: grey;
   width: 96px;
   color: white;
