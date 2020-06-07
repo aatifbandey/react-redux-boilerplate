@@ -20,6 +20,19 @@ export const individualGroup = css`
   border-radius: 8px;
 `;
 
+export const unactiveGroup = css`
+  background: grey;
+  width: 96px;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+  height: 24px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+`;
+
 export const groupsContainer = css`
   display: flex;
 `;
@@ -48,4 +61,13 @@ export const questionListContainer = css`
   background: aquamarine;
   margin: -2px 0 0 10px;
   z-index: 0;
+`;
+
+export const close = css`
+  position: relative;
+  left: 10px;
+`;
+
+export const header = css`
+  margin: auto;
 `;

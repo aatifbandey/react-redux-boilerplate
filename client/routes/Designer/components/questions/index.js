@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { string, number, func } from 'prop-types';
 import Loadable from 'react-loadable';
-import { questionWrapper } from './styles';
+import { questionWrapper, titleQuestion, closeQuestion } from './styles';
 
 const RatingQuestion = Loadable({
   loader: () => import(/* webpackChunkName: "ratingQuestion" */ './RatingQuestion').catch(
@@ -21,7 +21,7 @@ const SelectionQuestion = Loadable({
 
 const QuestionContainer = (props) => {
   const {
-    title, type, index, editTitle,
+    title, type, index, editTitle, removeQuestion,
   } = props;
   const [showInputTitle, setInputTitle] = useState(false);
   const renderTypeOfQuestion = () => {
@@ -44,16 +44,21 @@ const QuestionContainer = (props) => {
 
   return (
     <div className={questionWrapper}>
-      <div onClick={() => setInputTitle(true)}>
-        {!showInputTitle ? (
-          `${title}`
-        ) : (
-          <input
-            type="text"
-            defaultValue={title}
-            onKeyPress={(e) => changeTitle(e)}
-          />
-        )}
+      <div className={titleQuestion}>
+        <div onClick={() => setInputTitle(true)}>
+          {!showInputTitle ? (
+            `${title}`
+          ) : (
+            <input
+              type="text"
+              defaultValue={title}
+              onKeyPress={(e) => changeTitle(e)}
+            />
+          )}
+        </div>
+        <div className={closeQuestion} onClick={() => removeQuestion(index)}>
+          X
+        </div>
       </div>
       {renderTypeOfQuestion()}
     </div>
@@ -65,5 +70,6 @@ QuestionContainer.propTypes = {
   type: string.isRequired,
   index: number.isRequired,
   editTitle: func.isRequired,
+  removeQuestion: func.isRequired,
 };
 export default QuestionContainer;
