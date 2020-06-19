@@ -1,4 +1,8 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
+// const webpack = require('webpack');
+
 const fs = require('fs-extra');
 
 // const ifProd = process.env.NODE_ENV === 'production' ? true : false;
@@ -43,6 +47,7 @@ module.exports = {
     crossOriginLoading: 'anonymous',
     globalObject: ifDev ? 'this' : 'window', // on dev we set to 'this' to handle comlink-loader bug. Until we can move to worker-plugin
   },
+  devtool: 'source-map', // to map error to exact line of file
   mode: ifDev ? 'production' : 'development',
   devServer: {
     historyApiFallback: true, // to handle routes on server, it will server index.html page rather than giving 404
@@ -121,13 +126,18 @@ module.exports = {
         'react-loadable.json',
       ),
     }),
-    // new CopyWebpackPlugin([
-    //  {
-    //    from: path.resolve(appRootDir.get(), '', '/', 'static'),
-    //    to: path.resolve(appRootDir.get(), buildPath, '../static'),
-    //    flatten: true,
-    //  },
-    // ]),
+    /**
+     ** Manage your variable with .env, .env.prod
+     */
+    new Dotenv({
+      path: ifDev ? './.env' : './.env.prod', // './some.other.env', // load this now instead of the ones in '.env'
+      safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
+      allowEmptyValues: true, // allow empty variables (e.g. `FOO=`) (treat it as empty string, rather than missing)
+      systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
+      silent: true, // hide any errors
+      defaults: false, // load '.env.defaults' as the default values if empty.
+    }),
+
     new AssetsPlugin({
       filename: 'assets.json',
       path: path.resolve(appRootDir.get(), buildPath),

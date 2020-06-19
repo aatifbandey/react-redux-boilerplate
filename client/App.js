@@ -14,6 +14,7 @@ import configureStore from './store';
 const initialState = {};
 
 const store = configureStore(initialState);
+console.log(process.env.DB_HOST);
 
 const App = ({ history }) => (
   <Provider store={store}>
